@@ -2,12 +2,25 @@ ul {
   list-style: none;
   .title {
     margin: 10px;
-    font-size: 1.3rem;
+    font-size: 1rem;
   }
   .list-group-item {
-    padding: 15px;
+    padding: 10px;
     .form-check-input {
       padding: 10px;
     }
   }
+}
+
+.form-group{
+    .input{
+        width: 22%;
+        margin: 10px
+    }
+    
+    .submit{
+        position: relative;
+        top: -50px;
+        left: 25%;
+    }
 }

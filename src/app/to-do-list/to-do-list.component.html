@@ -1,3 +1,11 @@
+
+<form [formGroup]="todoListForm">
+    <div class="form-group">
+      <input type="text" class="form-control input" placeholder="Enter task" formControlName="todoitem">
+      <button type="submit" class="btn btn-dark submit" (click)="onSubmit(todoListForm.value)">Submit</button>
+    </div>
+    
+  </form>
 <div class="card-body p-4">
   <ul class="list-group rounded-0" *ngFor="let t0DoItem of toDoList">
     <li class="list-group-item border-0 d-flex align-items-center ps-0" (click)="isChecked(t0DoItem)"
