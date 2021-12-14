@@ -1,10 +1,11 @@
 <div class="card-body p-4">
   <ul class="list-group rounded-0" *ngFor="let t0DoItem of toDoList">
-    <li class="list-group-item border-0 d-flex align-items-center ps-0">
+    <li class="list-group-item border-0 d-flex align-items-center ps-0" (click)="isChecked(t0DoItem)"
+    >
       <input
         class="form-check-input me-3"
         type="checkbox"
-        (click)="isChecked()"
+        [checked]="t0DoItem.isChecked"
       />
       <span class="title">{{t0DoItem.title}}</span>
     </li>

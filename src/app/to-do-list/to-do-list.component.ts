@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import store from '../store';
 
 @Component({
   selector: "app-to-do-list",
@@ -6,35 +7,24 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./to-do-list.component.scss"],
 })
 export class ToDoListComponent implements OnInit {
-  toDoList: any = [
-    {
-      title: "Go to gym",
-      isChecked: false,
-    },
-    {
-      title: "Buy milk",
-      isChecked: false,
-    },
-    {
-      title: "Write article",
-      isChecked: false,
-    },
-    {
-      title: "go to market",
-      isChecked: false,
-    },
-    {
-      title: "study for one hour",
-      isChecked: false,
-    },
-  ];
+  toDoList: any = [];
 
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.toDoList = store.getState().allTodos;
+    store.subscribe(() => {
+      this.toDoList = store.getState().allTodos;
+    })
+  }
 
 
-  isChecked(){
-    console.log('checked')
+  isChecked(t0DoItem:any){
+    store.dispatch({
+      type:'TODO_CHECKED',
+      payload:t0DoItem
+    })
   }
 }
+
+
