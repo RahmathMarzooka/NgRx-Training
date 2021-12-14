@@ -1,0 +1,13 @@
+ul {
+  list-style: none;
+  .title {
+    margin: 10px;
+    font-size: 1.3rem;
+  }
+  .list-group-item {
+    padding: 15px;
+    .form-check-input {
+      padding: 10px;
+    }
+  }
+}
