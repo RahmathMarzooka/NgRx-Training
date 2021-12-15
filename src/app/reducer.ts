@@ -27,9 +27,14 @@ let allTodos = [
     isChecked: false,
   },
 ];
+
+
+
 let initialState = {
   allTodos: allTodos,
   isAllCompleted: false,
+  completedTodos: [],
+  incompletedTodos:[]
 };
 
 function rootReducer(state: any = initialState, action: any) {
@@ -62,6 +67,24 @@ function rootReducer(state: any = initialState, action: any) {
       return {
         ...state,
         allTodos,
+      };
+    }
+    case "SHOW_COMPLETED": {
+      const completedTodos = state.allTodos.filter((t: any) => {
+        return t.isChecked == true;
+      });
+      return {
+        ...state,
+        completedTodos,
+      };
+    }
+    case "SHOW_INCOMPLETED":{
+      const incompletedTodos = state.allTodos.filter((t: any) => {
+        return t.isChecked == false;
+      });
+      return {
+        ...state,
+        incompletedTodos,
       };
     }
   }
