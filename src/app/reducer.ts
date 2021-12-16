@@ -69,24 +69,12 @@ function rootReducer(state: any = initialState, action: any) {
         allTodos,
       };
     }
-    case "SHOW_COMPLETED": {
-      const completedTodos = state.allTodos.filter((t: any) => {
-        return t.isChecked == true;
-      });
+    case "SHOW_COMPLETED" && "SHOW_INCOMPLETED" && "SHOW_ALL" : {
       return {
-        ...state,
-        completedTodos,
+        ...state
       };
     }
-    case "SHOW_INCOMPLETED":{
-      const incompletedTodos = state.allTodos.filter((t: any) => {
-        return t.isChecked == false;
-      });
-      return {
-        ...state,
-        incompletedTodos,
-      };
-    }
+
   }
   return state;
 }

@@ -1,24 +1,17 @@
-
 <form [formGroup]="todoListForm">
-    <div class="form-group">
-      <input type="text" class="form-control input" placeholder="Enter task" formControlName="todoitem">
-      <button type="submit" class="btn btn-dark submit" (click)="onSubmit(todoListForm.value)">Submit</button>
-    </div>
-    </form>
-    <div class="d-inline-flex">
-<div class="card-body p-4">
-  <ul class="list-group rounded-0" *ngFor="let t0DoItem of toDoList">
-    <li class="list-group-item border-0 d-flex align-items-center ps-0" (click)="isChecked(t0DoItem)"
-    >
-      <input
-        class="form-check-input me-3"
-        type="checkbox"
-        [checked]="t0DoItem.isChecked"
-      />
-      <span class="title">{{t0DoItem.title}}</span>
-    </li>
-  </ul>
-</div>
-<app-radio-buttons class="radio-btn mt-4"></app-radio-buttons>
-
+  <div class="form-group">
+    <input type="text" class="form-control input" placeholder="Enter task" formControlName="todoitem">
+    <button type="submit" class="btn btn-dark submit" (click)="onSubmit(todoListForm.value)">Submit</button>
+  </div>
+</form>
+<div>
+  <app-radio-buttons (todoEvent)="getToDoList($event)" class="radio-btn mt-4 p-4"></app-radio-buttons>
+  <div class="card-body p-4">
+    <ul class="list-group rounded-0" *ngFor="let toDoItem of toDoList">
+      <li class="list-group-item border-0 d-flex align-items-center ps-0" (click)="isChecked(toDoItem)">
+        <input class="form-check-input me-3" type="checkbox" [checked]="toDoItem.isChecked" />
+        <span class="title">{{toDoItem.title}}</span>
+      </li>
+    </ul>
+  </div>
 </div>
