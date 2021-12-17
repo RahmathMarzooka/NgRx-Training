@@ -8,50 +8,29 @@ import store from "../store";
   styleUrls: ["./radio-buttons.component.scss"],
 })
 export class RadioButtonsComponent implements OnInit {
-  toDoList: any;
-  completedTodoList: any;
-  incompletedTodoList: any;
-  @Output() todoEvent = new EventEmitter<any>();
+  selectedFilter:string = 'all';
   constructor() {}
 
   ngOnInit(): void {
-    
     store.subscribe(() => {
-      let toDos = store.getState().allTodos;
-      this.completedTodoList = toDos.filter((t: any) => {
-        return t.isChecked == true;
-      });
-      this.incompletedTodoList = toDos.filter((t: any) => {
-        return t.isChecked == false;
-      });
-    });
+      let selectedFilter = store.getState().selectedFilter;
+      this.selectedFilter = selectedFilter;
+    })
   }
 
-  showAllItems() {
+  isChecked(filterName:string){
+    return this.selectedFilter == filterName;
+  }
+
+  radioChecked(selectedFilter:String){
     store.dispatch({
-      type: "SHOW_ALL",
-    });
-    this.toDoList = store.getState().allTodos;
-    this.emitToDoList(this.toDoList);
+      type:'FILTER_CHECKED',
+      payload:{
+        selectedFilter
+      }
+    })
   }
 
-  showCompletedItems() {
-    store.dispatch({
-      type: "SHOW_COMPLETED",
-    });
-    this.toDoList = this.completedTodoList;
-    this.emitToDoList(this.toDoList);
-  }
 
-  showIncompletedItems() {
-    store.dispatch({
-      type: "SHOW_INCOMPLETED",
-    });
-    this.toDoList = this.incompletedTodoList;
-    this.emitToDoList(this.toDoList);
-  }
 
-  emitToDoList(toDoList: any) {
-    this.todoEvent.emit(toDoList);
-  }
 }

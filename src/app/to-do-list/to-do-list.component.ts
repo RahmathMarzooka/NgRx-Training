@@ -1,6 +1,7 @@
-
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder} from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
+import { checkTodo } from '../actions';
+import { selectAllTodos, selectCompletedTodos, unSelectCompletedTodos } from '../selector';
 
 import store from '../store';
 
@@ -10,7 +11,7 @@ import store from '../store';
   styleUrls: ['./to-do-list.component.scss'],
 })
 export class ToDoListComponent implements OnInit {
-  @Input() toDoList: any = [];
+  toDoList: any = [];
   todoListForm: any;
 
   constructor(private formBuilder: FormBuilder) {}
@@ -20,17 +21,24 @@ export class ToDoListComponent implements OnInit {
       todoitem: [''],
     });
 
-    this.toDoList = store.getState().allTodos;
+    const state = store.getState();
+    this.toDoList = selectAllTodos(state);
     store.subscribe(() => {
-      this.toDoList = store.getState().allTodos;
+      let selectedFilter = store.getState().selectedFilter;
+      if (selectedFilter === 'completed') {
+       this.toDoList = selectCompletedTodos(state)
+      }
+      if (selectedFilter === 'incompleted') {
+        this.toDoList = unSelectCompletedTodos(state)
+      }
+      if (selectedFilter === 'all') {
+        this.toDoList = selectAllTodos(state)
+      }
     });
   }
 
-  isChecked(t0DoItem: any) {
-    store.dispatch({
-      type: 'TODO_CHECKED',
-      payload: t0DoItem,
-    });
+  onChecked(t0DoItem: any) {
+    store.dispatch(checkTodo(t0DoItem));
   }
 
   onSubmit(data: any) {

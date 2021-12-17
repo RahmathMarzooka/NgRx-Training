@@ -5,8 +5,8 @@
       type="radio"
       name="flexRadioDefault"
       id="flexRadioDefault2"
-      checked
-      (click)="showAllItems()"
+      [checked]="isChecked('all')"
+      (change)="radioChecked('all')"
     />
     <label class="form-check-label" for="flexRadioDefault2">
       All
@@ -18,7 +18,8 @@
       type="radio"
       name="flexRadioDefault"
       id="flexRadioDefault1"
-      (click)="showCompletedItems()"
+      [checked]="isChecked('completed')"
+      (change)="radioChecked('completed')"
     />
     <label class="form-check-label" for="flexRadioDefault1">
       Completed
@@ -30,7 +31,8 @@
       type="radio"
       name="flexRadioDefault"
       id="flexRadioDefault1"
-      (click)="showIncompletedItems()"
+      [checked]="isChecked('incompleted')"
+      (change)="radioChecked('incompleted')"
     />
     <label class="form-check-label" for="flexRadioDefault1">
       Incompleted

@@ -1,3 +1,4 @@
+import { TODO_CHECKED } from "./actions";
 import store from "./store";
 
 let allTodos = [
@@ -32,14 +33,12 @@ let allTodos = [
 
 let initialState = {
   allTodos: allTodos,
-  isAllCompleted: false,
-  completedTodos: [],
-  incompletedTodos:[]
+  selectedFilter:'all'
 };
 
 function rootReducer(state: any = initialState, action: any) {
   switch (action.type) {
-    case "TODO_CHECKED": {
+    case TODO_CHECKED: {
       const allTodos = state.allTodos.map((t: any) => {
         if (t.id === action.payload.id) {
           return {
@@ -69,10 +68,11 @@ function rootReducer(state: any = initialState, action: any) {
         allTodos,
       };
     }
-    case "SHOW_COMPLETED" && "SHOW_INCOMPLETED" && "SHOW_ALL" : {
-      return {
-        ...state
-      };
+    case "FILTER_CHECKED": {
+      return{
+        ...state,
+        selectedFilter: action.payload.selectedFilter
+      }
     }
 
   }
