@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { checkTodo } from '../actions';
+import { checkTodo, TODO_ADDED, TODO_CHECKED } from '../actions';
 import { selectAllTodos, selectCompletedTodos, unSelectCompletedTodos } from '../selector';
 
 import store from '../store';
@@ -38,12 +38,15 @@ export class ToDoListComponent implements OnInit {
   }
 
   onChecked(t0DoItem: any) {
-    store.dispatch(checkTodo(t0DoItem));
+    store.dispatch( {
+      type: TODO_CHECKED,
+      payload: t0DoItem,
+    });
   }
 
   onSubmit(data: any) {
     store.dispatch({
-      type: 'TODO_ADDED',
+      type: TODO_ADDED,
       payload: data.todoitem,
     });
     this.clearInput();

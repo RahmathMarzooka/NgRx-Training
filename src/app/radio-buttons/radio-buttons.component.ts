@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from "@angular/core";
+import { FILTER_CHECKED } from "../actions";
 
 import store from "../store";
 
@@ -24,7 +25,7 @@ export class RadioButtonsComponent implements OnInit {
 
   radioChecked(selectedFilter:String){
     store.dispatch({
-      type:'FILTER_CHECKED',
+      type:FILTER_CHECKED,
       payload:{
         selectedFilter
       }

@@ -1,4 +1,4 @@
-import { TODO_CHECKED } from "./actions";
+import { FILTER_CHECKED, TODO_ADDED, TODO_CHECKED } from "./actions";
 import store from "./store";
 
 let allTodos = [
@@ -54,7 +54,7 @@ function rootReducer(state: any = initialState, action: any) {
         allTodos,
       };
     }
-    case "TODO_ADDED": {
+    case TODO_ADDED: {
       const allTodos = [
         ...state.allTodos,
         {
@@ -68,7 +68,7 @@ function rootReducer(state: any = initialState, action: any) {
         allTodos,
       };
     }
-    case "FILTER_CHECKED": {
+    case FILTER_CHECKED: {
       return{
         ...state,
         selectedFilter: action.payload.selectedFilter
